@@ -12,7 +12,10 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+import com.google.gson.JsonObject;
 
 
 
@@ -25,6 +28,31 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
         getServer().getPluginManager().registerEvents(this, this);
 		log = this.getLogger();
 		
+		
+		try {
+			final Socket socket = IO.socket(this.getConfig().getString("socketchaturl"));
+		
+			socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+				@Override
+				public void call(Object... args) {
+					JsonObject regobj = new JsonObject();
+					regobj.addProperty("name", "Dareka");
+					socket.emit("in", regobj);
+				}
+			}).on("log", new Emitter.Listener() {
+				@Override
+				public void call(Object... args) {}
+			}).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+				@Override
+				public void call(Object... args) {}
+			});
+			socket.connect();
+			log.info("Try");
+		} catch (URISyntaxException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			log.info("Catch");
+		}
 		
 		log.info("BukkitSocketChat has been enabled!");
 	}
