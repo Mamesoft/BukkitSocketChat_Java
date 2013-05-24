@@ -1,0 +1,6 @@
+#SocketChatへサーバーからアクセスできるURLを指定してください
+socketchaturl: http://localhost:8080/
+#ゲーム内での発言をSocketChatに送るときに使用する親ハッシュタグを指定してください
+hashtag: Game
+#SocketChatからの発言をゲーム内に表示するときの接頭辞を指定してください
+prefix: WEB
