@@ -77,7 +77,7 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 		            	log.info(jsondata.toString());
 		            	if (!jsondata.isNull("comment")){
 		            		String name = jsondata.getString("name");
-		            		if (jsondata.isNull("channel") && name != "ゲームサーバー"){
+		            		if (jsondata.isNull("channel") && !name.equals("ゲームサーバー")){
 			            		String comment = jsondata.getString("comment");
 			            		String ip = jsondata.getString("ip");
 			            		Bukkit.broadcastMessage(ChatColor.GREEN + "[" +  prefix + "]" + ChatColor.WHITE + name + " : " + comment + " (" + ip + ")");
