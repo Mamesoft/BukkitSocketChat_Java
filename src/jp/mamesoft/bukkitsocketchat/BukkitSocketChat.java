@@ -56,18 +56,18 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	
 	            @Override
 	            public void onError(SocketIOException socketIOException) {
-	                log.info("an Error occured");
+	                log.info("[WARNING]Socket Error!");
 	                socketIOException.printStackTrace();
 	            }
 	
 	            @Override
 	            public void onDisconnect() {
-	                log.info("Connection terminated.");
+	                log.info("[WARNING]SocketChat Disconnect!");
 	            }
 	
 	            @Override
 	            public void onConnect() {
-	                log.info("Connection established");
+	                log.info("SocketChat Connect.");
 	            }
 	
 	            @Override
@@ -82,10 +82,8 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 			            		String ip = jsondata.getString("ip");
 			            		Bukkit.broadcastMessage(ChatColor.GREEN + "[" +  prefix + "]" + ChatColor.WHITE + name + " : " + comment + " (" + ip + ")");
 		            		}
-		            	} 
+		            	}
 	            	}
-	                log.info("Server triggered event '" + event + "'");
-            	
 	            }
 	        });
 	
@@ -109,14 +107,11 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
-		
 		socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが参加しました"));
-		log.info(event.getPlayer().getName() + "is Login.");
 	}
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが撤退しました"));
-		log.info(event.getPlayer().getName() + "is Logout.");
 	}
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
@@ -124,7 +119,6 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 		String user = event.getPlayer().getName();
 		String world = event.getPlayer().getWorld().getName();
 		String ip = event.getPlayer().getAddress().getHostString();
-		log.info("[" + user + "]" + msg);
 		socket.emit("say", new JSONObject().put("comment", msg).put("user", user).put("channel", world).put("ip", ip).put("pass", this.getConfig().getString("socket_pass")));
 	}
 }
