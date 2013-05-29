@@ -21,16 +21,28 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-
-
-
-
 public class BukkitSocketChat extends JavaPlugin implements Listener{
 	Logger log;
 	SocketIO socket;
+	String chatname;
+	String Lang;
+
 	public void onEnable(){
 		this.saveDefaultConfig();
+
+		Lang = this.getConfig().getString("language");
+		if (Lang.equals("en")){
+			chatname = "Game Server";
+		}else if(Lang.equals("ja")){
+			chatname = "ゲームサーバー";
+		}else{
+			log.info("[WARNING]" + Lang + " is not supported.");
+			log.info("[WARNING]English(en) or Japanese(ja) Only.");
+			log.info("[WARNING]言語設定" + Lang + "は使用できません");
+			log.info("[WARNING]英語(en)か日本語(ja)のみ対応しています。");
+			chatname = "Game Server";
+		}
+		
 		final String url = this.getConfig().getString("socketchaturl");
 		final String prefix = this.getConfig().getString("prefix");
 		final String pass = this.getConfig().getString("socket_pass");
@@ -77,7 +89,7 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 		            	log.info(jsondata.toString());
 		            	if (!jsondata.isNull("comment")){
 		            		String name = jsondata.getString("name");
-		            		if (jsondata.isNull("channel") && !name.equals("ゲームサーバー")){
+		            		if (jsondata.isNull("channel") && !name.equals(chatname)){
 			            		String comment = jsondata.getString("comment");
 			            		String ip = jsondata.getString("ip");
 			            		Bukkit.broadcastMessage(ChatColor.GREEN + "[" +  prefix + "]" + ChatColor.WHITE + name + " : " + comment + " (" + ip + ")");
@@ -87,7 +99,7 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	            }
 	        });
 	        socket.emit("register", new JSONObject().put("mode", "client").put("lastid", 1));
-	        socket.emit("inout", new JSONObject().put("name", "ゲームサーバー").put("pass", pass));
+	        socket.emit("inout", new JSONObject().put("name", chatname).put("pass", pass));
 	        log.info("BukkitSocketChat has been enabled!");
 		
 		} catch (MalformedURLException e1) {
@@ -99,18 +111,26 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	}
 	
 	public void onDisable(){
-        socket.emit("inout", new JSONObject().put("name", "ゲームサーバー").put("pass", this.getConfig().getString("socket_pass")));
+        socket.emit("inout", new JSONObject().put("name", chatname).put("pass", this.getConfig().getString("socket_pass")));
 		log.info("BukkitSocketChat has been disabled.");
 	}
 	
 	
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
-		socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが参加しました"));
+		if (Lang.equals("ja")){
+			socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが参加しました"));
+		}else{
+			socket.emit("say", new JSONObject().put("comment", event.getPlayer().getName() + " is LogIn."));
+		}
 	}
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが撤退しました"));
+		if (Lang.equals("ja")){
+			socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが撤退しました"));
+		}else{
+			socket.emit("say", new JSONObject().put("comment", event.getPlayer().getName() + " is LogOut"));
+		}
 	}
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
