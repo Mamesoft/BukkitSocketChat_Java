@@ -86,21 +86,20 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	            	}
 	            }
 	        });
-	
-	        // This line is cached until the connection is establisched.
 	        socket.emit("register", new JSONObject().put("mode", "client").put("lastid", 1));
-	        socket.emit("inout", new JSONObject().put("name", "ゲームサーバー").put("gameuser", "in").put("pass", pass));
-	        
+	        socket.emit("inout", new JSONObject().put("name", "ゲームサーバー").put("pass", pass));
+	        log.info("BukkitSocketChat has been enabled!");
 		
 		} catch (MalformedURLException e1) {
-			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
+			log.info("[WARNING]BukkitSocketChat is Error!");
 		}
         
-		log.info("BukkitSocketChat has been enabled!");
+		
 	}
 	
-	public void onDisable(){ 
+	public void onDisable(){
+        socket.emit("inout", new JSONObject().put("name", "ゲームサーバー").put("pass", this.getConfig().getString("socket_pass")));
 		log.info("BukkitSocketChat has been disabled.");
 	}
 	
