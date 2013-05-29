@@ -10,7 +10,7 @@
 ==使用方法==
 #nodechatフォルダ内のSocketChatを起動します(詳細後述)
 #BukkitSocketChat.jarをCraftBukkitのpluginフォルダに入れ、Bukkitサーバーを一度起動し終了します
-#pluginフォルダ内に生成されたBukkitSocketChatフォルダのconfig.ymlを開き、SocketChatのURLとsocket接続用のパスワードを設定します(セキュリティのため必ずパスワードを変更してください)
+#pluginフォルダ内に生成されたBukkitSocketChatフォルダのconfig.ymlを開き、SocketChatのURLとsocket接続用のパスワードを設定します(セキュリティのため必ずパスワードを変更してください)。languageをjaに設定することでゲーム内のログなどが日本語になります。
 
 ===SocketChat起動方法===
 #http://nodejs.org/からNode.jsを、http://www.mongodb.org/からMongoDBをインストールします
@@ -18,6 +18,9 @@
 #settingsファイルを開きsocket接続用のパスワード、MongoDBの接続IDとパスワード、ポート番号を設定します
 #ターミナルでnode ch.jsと実行しSocketChatを起動します
 
+==設定==
+起動するとPluginのBukkitSocketChatディレクトリ内にconfig.ymlが生成されます。
+設定項目はconfig.yml内の注釈を参照してください。
 
 ==ソースコード==
 ;プラグイン
