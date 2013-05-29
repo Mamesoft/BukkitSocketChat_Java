@@ -129,7 +129,7 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 		if (Lang.equals("ja")){
 			socket.emit("say", new JSONObject().put("comment", "「" + event.getPlayer().getName() + "」さんが撤退しました"));
 		}else{
-			socket.emit("say", new JSONObject().put("comment", event.getPlayer().getName() + "is LogOut"));
+			socket.emit("say", new JSONObject().put("comment", event.getPlayer().getName() + " is LogOut"));
 		}
 	}
 	@EventHandler
