@@ -1,6 +1,12 @@
+#SocketChat Access URL
 #SocketChatへサーバーからアクセスできるURLを指定してください
 socketchaturl: http://localhost:8080/
+#Comment in SocketChat Prefix
 #SocketChatからの発言をゲーム内に表示するときの接頭辞を指定してください
 prefix: WEB
-#SocketChatのConfigファイル内のSocket_PASSと同じにしてください
+#Same SOCKET_PASS in ChatConfig 
+#SocketChatのConfigファイル内のSOCKET_PASSと同じにしてください
 socket_pass: aaa
+#Use Language. en or ja
+#言語設定　日本語の場合はja、英語の場合はenと指定してください。
+language: en
