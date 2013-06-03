@@ -112,6 +112,7 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	
 	public void onDisable(){
         socket.emit("inout", new JSONObject().put("name", chatname).put("pass", this.getConfig().getString("socket_pass")));
+        socket.disconnect();
 		log.info("BukkitSocketChat has been disabled.");
 	}
 	
