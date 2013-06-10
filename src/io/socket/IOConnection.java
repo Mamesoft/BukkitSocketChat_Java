@@ -457,10 +457,10 @@ class IOConnection implements IOCallback {
 	private synchronized void sendPlain(String text) {
 		if (getState() == STATE_READY)
 			try {
-				logger.info("> " + text);
+				//logger.info("> " + text);
 				transport.send(text);
 			} catch (Exception e) {
-				logger.info("IOEx: saving");
+				//logger.info("IOEx: saving");
 				outputBuffer.add(text);
 			}
 		else {
@@ -530,11 +530,11 @@ class IOConnection implements IOCallback {
 				// DEBUG
 				String[] texts = outputBuffer.toArray(new String[outputBuffer
 						.size()]);
-				logger.info("Bulk start:");
+				//logger.info("Bulk start:");
 				for (String text : texts) {
-					logger.info("> " + text);
+					//logger.info("> " + text);
 				}
-				logger.info("Bulk end");
+				//logger.info("Bulk end");
 				// DEBUG END
 				transport.sendBulk(texts);
 			} catch (IOException e) {
@@ -610,7 +610,7 @@ class IOConnection implements IOCallback {
 	 *            the text
 	 */
 	public void transportMessage(String text) {
-		logger.info("< " + text);
+		//logger.info("< " + text);
 		IOMessage message;
 		try {
 			message = new IOMessage(text);

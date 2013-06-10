@@ -29,6 +29,7 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 
 	public void onEnable(){
 		this.saveDefaultConfig();
+		log = this.getLogger();
 
 		Lang = this.getConfig().getString("language");
 		if (Lang.equals("en")){
@@ -47,7 +48,6 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 		final String prefix = this.getConfig().getString("prefix");
 		final String pass = this.getConfig().getString("socket_pass");
         getServer().getPluginManager().registerEvents(this, this);
-		log = this.getLogger();
 		
 		try {
 			socket = new SocketIO(url);
@@ -55,7 +55,6 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	            @Override
 	            public void onMessage(JSONObject json, IOAcknowledge ack) {
 	                try {
-	                    log.info("Server said:" + json.toString(2));
 	                } catch (JSONException e) {
 	                    e.printStackTrace();
 	                }
@@ -63,7 +62,6 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	
 	            @Override
 	            public void onMessage(String data, IOAcknowledge ack) {
-	                log.info("Server said: " + data);
 	            }
 	
 	            @Override
@@ -86,7 +84,6 @@ public class BukkitSocketChat extends JavaPlugin implements Listener{
 	            public void on(String event, IOAcknowledge ack, Object... args) {
 	            	if (event.equals("log")){
 		            	final JSONObject jsondata = (JSONObject)args[0];
-		            	log.info(jsondata.toString());
 		            	if (!jsondata.isNull("comment")){
 		            		String name = jsondata.getString("name");
 		            		if (jsondata.isNull("channel") && !name.equals(chatname)){
