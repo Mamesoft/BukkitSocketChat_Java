@@ -1,6 +1,6 @@
 =BukkitSocketChat=
 ;配布サイト:http://mamesoft.jp/bukkit/socketchat
-;バージョン:1.11
+;バージョン:1.12
 
 :このプラグインはWebからゲーム内のチャットに参加できるようにし、Webで過去のチャットログを表示できるようにするプラグインです。
 :チャット部分にはうひょ氏などが開発されたSocketChatを使用しています。
@@ -14,7 +14,7 @@
 
 ===SocketChat起動方法===
 #http://nodejs.org/ からNode.jsを、http://www.mongodb.org/ からMongoDBをインストールします
-#npmでnodechatディレクトリのpackage.jsonに入っている必要ライブラリのリストに従いインストールします
+#npmでnodechat_jaディレクトリのpackage.jsonに入っている必要ライブラリのリストに従いインストールします
 #settingsファイルを開きsocket接続用のパスワード、MongoDBの接続IDとパスワード、ポート番号を設定します
 #ターミナルでnode ch.jsと実行しSocketChatを起動します
 
