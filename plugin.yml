@@ -1,6 +1,6 @@
 name: BukkitSocketChat
 main: jp.mamesoft.bukkitsocketchat.BukkitSocketChat
-version: 1.12
+version: 1.20
 description: You can join chat from web.
 author: Mamesoft
 website: http://mamesoft.jp/bukkit/socketchat

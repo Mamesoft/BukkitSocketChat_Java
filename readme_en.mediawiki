@@ -1,6 +1,6 @@
 =BukkitSocketChat=
 ;WebSite:http://mamesoft.jp/bukkit/socketchat
-;Version:1.12
+;Version:1.20
 
  This document uses some automatic translation.
  Please see Japanese document, if you can read Japanese.
